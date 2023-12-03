@@ -3,7 +3,7 @@ import { useContext } from "react";
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";
 
-export default function CityCard() {
+export default function CityCard({ cityName, onRemove }) {
   const { cityData } = useContext(CityContext);
 
   return (
@@ -33,6 +33,17 @@ export default function CityCard() {
           </span>{" "}
           {cityData.weather[0]?.main}
         </p>
+      </div>
+
+      <div className="flex justify-center ">
+        {/*Remove Favorite */}
+        <button
+          type="button"
+          className="inline-flex items-center px-4 py-2 mb-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400"
+          onClick={onRemove}
+        >
+          Remove favorite
+        </button>
       </div>
     </div>
   );

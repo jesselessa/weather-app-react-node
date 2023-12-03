@@ -5,11 +5,14 @@ import { toast } from "react-toastify";
 import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Form() {
-  const [buttonClick, setButtonClick] = useState("");
+  const [buttonClick, setButtonClick] = useState("buttonFetch");
 
-  const { city, setCity, setCityData } = useContext(CityContext);
+  const { city, setCity, setCityData, favoriteCities, setFavoriteCities } =
+    useContext(CityContext);
 
-  const callAPI = (url) => {
+  const fetchCityData = async (city) => {
+    const url = `http://localhost:8000/data/${city}`;
+
     fetch(url)
       .then((res) => {
         if (res.ok) return res.json();
@@ -17,16 +20,16 @@ export default function Form() {
       })
       .then((data) => {
         if (data.cod === "404") {
-          toast.error("Enter a valid city name");
+          toast.error("Enter a valid city name.");
           // Not to display CityCard if former valid research
           setCityData(null);
         } else {
-          console.log("Data:", data);
+          console.log("City data:", data);
           setCityData(data);
         }
       })
       .catch((error) => {
-        console.error("Failed to fetch:", error);
+        console.error("Failed to fetch city data:", error);
       });
   };
 
@@ -36,19 +39,35 @@ export default function Form() {
     if (city) {
       // First button : API call
       if (buttonClick === "buttonFetch") {
-        const url = `http://localhost:8000/data/${city}`;
-        callAPI(url);
-
-        // Reset form
-        setCity("");
+        fetchCityData(city);
       }
 
       /// Second button : Add to favorites
       else {
-        //TODO
+        // Check if city has not been already stored in LS
+        if (favoriteCities.indexOf(city) !== -1) {
+          toast.error("You already saved this city in your Favorites list !");
+        } else {
+          if (favoriteCities.length === 3) {
+            toast.error(
+              "You can't save more than three cities in your Favorites list !"
+            );
+          } else {
+            // Create a copy of favoriteCities  and add city in the new array
+            const copyFavoriteCities = [...favoriteCities, city];
+            // Change state of favoriteCities
+            setFavoriteCities(copyFavoriteCities);
+            // Add to local storage
+            localStorage.setItem(
+              "favoriteCities",
+              JSON.stringify(copyFavoriteCities)
+            );
+            toast.success("The city has been added to your Favorites list.");
+          }
+        }
       }
     } else {
-      toast.error("Enter a city name in the search area.");
+      toast.error("Enter a city name in the input field.");
       // Not to display CityCard if former valid research
       setCityData(null);
     }

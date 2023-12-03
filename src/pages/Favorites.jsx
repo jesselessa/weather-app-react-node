@@ -1,7 +1,7 @@
 export default function Favorites() {
   return (
-    <div>
-      <h1 className="text-center pt-5">Favorites</h1>
+    <div className="py-9 flex flex-col lg:flex-row lg:justify-around">
+      Favorites
     </div>
   );
 }
