@@ -4,10 +4,10 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 //Pages and components
-import Home from "./pages/Home";
-import Favorites from "./pages/Favorites";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Home from "./pages/Home.jsx";
+import Favorites from "./pages/Favorites.jsx";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   return (

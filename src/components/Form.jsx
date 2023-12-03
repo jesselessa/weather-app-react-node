@@ -1,13 +1,67 @@
-import React from "react";
+import { useState, useContext } from "react";
+import { toast } from "react-toastify";
+
+// Context
+import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Form() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [buttonClick, setButtonClick] = useState("");
+
+  const { city, setCity, setCityData } = useContext(CityContext);
+
+  const callAPI = (url) => {
+    fetch(url)
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw res;
+      })
+      .then((data) => {
+        if (data.cod === "404") {
+          toast.error("Enter a valid city name");
+          // Not to display CityCard if former valid research
+          setCityData(null);
+        } else {
+          console.log("Data:", data);
+          setCityData(data);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to fetch:", error);
+      });
   };
 
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleClick = () => {};
+    if (city) {
+      // First button : API call
+      if (buttonClick === "buttonFetch") {
+        const url = `http://localhost:8000/data/${city}`;
+        callAPI(url);
+
+        // Reset form
+        setCity("");
+      }
+
+      /// Second button : Add to favorites
+      else {
+        //TODO
+      }
+    } else {
+      toast.error("Enter a city name in the search area.");
+      // Not to display CityCard if former valid research
+      setCityData(null);
+    }
+  };
+
+  const handleChange = (e) => {
+    setCity(e.target.value);
+  };
+
+  const handleClick = (e) => {
+    // To select button by ID
+    setButtonClick(e.target.id);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="w-3/4 md:w-1/2 mx-auto">
@@ -29,9 +83,12 @@ export default function Form() {
           id="city"
           name="city"
           placeholder="Enter a city name"
+          value={city}
           onChange={handleChange}
+          autoComplete="off"
         />
       </div>
+
       <div className="flex flex-col md:flex-row justify-around pt-5">
         <button
           type="submit"
@@ -41,6 +98,7 @@ export default function Form() {
         >
           Search
         </button>
+
         <button
           type="submit"
           id="buttonFavorite"
