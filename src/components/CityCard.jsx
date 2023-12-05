@@ -3,7 +3,7 @@ import { useContext } from "react";
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";
 
-export default function cityDataCard({ cityName, onRemove }) {
+export default function cityDataCard({ cityName, showRemoveButton, onRemove }) {
   const { cityData } = useContext(CityContext);
 
   return (
@@ -39,14 +39,14 @@ export default function cityDataCard({ cityName, onRemove }) {
 
           <div className="flex justify-center ">
             {/*Btn remove favorite */}
-            {onRemove && (
+            {showRemoveButton && (
               <div className="py-3 flex justify-center">
                 <button
                   type="button"
                   className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400"
                   onClick={onRemove}
                 >
-                  Remove favorite
+                  Remove from Favorites
                 </button>
               </div>
             )}

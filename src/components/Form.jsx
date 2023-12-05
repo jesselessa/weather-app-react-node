@@ -38,7 +38,7 @@ export default function Form() {
             setFavoriteCities(copyFavoriteCities);
             console.log("copyFavoriteCities in Form.jsx", copyFavoriteCities);
 
-            // Define new value to LS
+            // Update LS
             localStorage.setItem(
               "favoriteCities",
               JSON.stringify(copyFavoriteCities)
