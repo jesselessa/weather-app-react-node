@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-//Pages and components
+// Pages and components
 import Home from "./pages/Home.jsx";
 import Favorites from "./pages/Favorites.jsx";
 import Navbar from "./components/Navbar.jsx";
@@ -22,7 +22,7 @@ function App() {
           <Footer />
         </BrowserRouter>
       </div>
-      <ToastContainer />
+      <ToastContainer autoClose={1500} draggable={false} />
     </>
   );
 }

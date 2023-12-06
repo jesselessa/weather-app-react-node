@@ -1,4 +1,6 @@
-export const fetchCityData = async (city, setCityData, toast) => {
+import { toast } from "react-toastify";
+
+export const fetchCityData = async (city, setCityData, setIsLoading) => {
   const url = `http://localhost:5000/data/${city}`;
 
   try {
@@ -13,10 +15,11 @@ export const fetchCityData = async (city, setCityData, toast) => {
     if (data.cod === "404") {
       toast.error("Enter a valid city name.");
     } else {
-      console.log("City data:", data);
       setCityData(data);
+      setIsLoading(false); // End of loading
     }
   } catch (error) {
     console.error("Failed to fetch city data:", error);
+    setIsLoading(false); // End of loading if error
   }
 };

@@ -3,14 +3,14 @@ import { useContext } from "react";
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";
 
-export default function cityDataCard({ cityName, showRemoveButton, onRemove }) {
+export default function CityCard({ cityName, showRemoveButton, onRemove }) {
   const { cityData } = useContext(CityContext);
 
   return (
     <>
       {cityData && (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg mx-auto p-4">
-          <h3 className="text-center text-xl font-bold  mb-2 ">
+        <div className="max-w-xs rounded overflow-hidden shadow-lg mb-5 p-3">
+          <h3 className="text-center text-xl font-bold mb-2">
             {cityData.name}, {cityData.sys?.country}
           </h3>
 
@@ -23,11 +23,11 @@ export default function cityDataCard({ cityName, showRemoveButton, onRemove }) {
           <div className="px-6 py-4 text-center">
             <p>
               <span className="text-gray-700 font-bold text-base">
-                Temperature :
+                Temperature&nbsp;:
               </span>{" "}
-              {Math.round(cityData.main?.temp)} °C <br />
-              (Min : {Math.round(cityData.main?.temp_min)} ° C , Max :{" "}
-              {Math.round(cityData.main?.temp_max)} °C)
+              {Math.round(cityData.main?.temp)}&nbsp;°&nbsp;C <br />
+              (Min : {Math.round(cityData.main?.temp_min)}&nbsp;°&nbsp;C ,
+              Max&nbsp;: {Math.round(cityData.main?.temp_max)}&nbsp;°&nbsp;C)
             </p>
             <p>
               <span className="text-gray-700 font-bold text-base">

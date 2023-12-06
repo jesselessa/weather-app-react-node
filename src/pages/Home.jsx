@@ -8,18 +8,28 @@ import CityCard from "../components/CityCard.jsx";
 import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Home() {
-  const { cityData } = useContext(CityContext);
+  const { isLoading, cityData } = useContext(CityContext);
 
   return (
-    <div className="container mx-auto px-5 pt-3 min-h-fit flex flex-col justify-around">
-      <h2 className="text-3xl font-bold mb-3 text-center">
+    <div className="container mx-auto min-h-fit flex flex-col justify-between p-3">
+      <h2 className="text-2xl text-center font-bold mb-3">
         Get weather data from any city !
       </h2>
 
       <Form />
 
-      <div className="flex flex-row justify-around m-4">
-        {cityData && <CityCard />}
+      <div className="flex flex-col justify-around items-center m-4">
+        {cityData ? (
+          <>
+            {isLoading ? (
+              <p className="text-center text-lg">Loading...</p>
+            ) : (
+              <CityCard />
+            )}
+          </>
+        ) : (
+          <>{null}</>
+        )}
       </div>
     </div>
   );

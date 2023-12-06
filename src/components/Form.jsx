@@ -8,8 +8,15 @@ import { CityContext } from "../contexts/cityContext.jsx";
 export default function Form() {
   const [buttonClick, setButtonClick] = useState("buttonFetch");
 
-  const { city, setCity, setCityData, favoriteCities, setFavoriteCities } =
-    useContext(CityContext);
+  const {
+    city,
+    setCity,
+    cityData,
+    setCityData,
+    setIsLoading,
+    favoriteCities,
+    setFavoriteCities,
+  } = useContext(CityContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,11 +24,15 @@ export default function Form() {
     if (city) {
       // First button : API call
       if (buttonClick === "buttonFetch") {
-        fetchCityData(city, setCityData, toast);
+        fetchCityData(city, setCityData, setIsLoading, toast);
       }
 
       /// Second button : Add to favorites
       else {
+        if (!cityData) {
+          toast.error("Use 'Search' button first before adding a city.");
+          return;
+        }
         // Reminder : indexOf() returns -1 when searched element is not in array
         if (favoriteCities.indexOf(city) !== -1) {
           toast.error("You already saved this city in your Favorites list !");
@@ -31,12 +42,10 @@ export default function Form() {
               "You can't save more than three cities in your Favorites list !"
             );
           } else {
-            // Create a copy of favoriteCities and add city (value in input field) in the new array
             const copyFavoriteCities = [...favoriteCities, city];
 
             // Update state of favoriteCities
             setFavoriteCities(copyFavoriteCities);
-            console.log("copyFavoriteCities in Form.jsx", copyFavoriteCities);
 
             // Update LS
             localStorage.setItem(
@@ -44,6 +53,9 @@ export default function Form() {
               JSON.stringify(copyFavoriteCities)
             );
             toast.success("The city has been added to your Favorites list.");
+
+            // Reset form
+            setCity("");
           }
         }
       }
@@ -62,11 +74,11 @@ export default function Form() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-3/4 md:w-1/2 mx-auto">
+    <form onSubmit={handleSubmit} className="w-full md:w-1/2 mx-auto">
       <div className="mt-1 relative rounded-md shadow-sm">
         <input
-          className="form-control 
-          block 
+          className="form-control
+          block
           w-full
           px-3 py-1.5
           text-base font-normal text-gray-700
@@ -87,11 +99,11 @@ export default function Form() {
         />
       </div>
 
-      <div className="flex flex-col md:flex-row justify-around pt-5">
+      <div className="flex flex-col md:flex-row justify-around p-5 gap-x-3">
         <button
           type="submit"
           id="buttonFetch"
-          className="inline-flex items-center justify-center px-3 py-2 mb-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="md:w-36 inline-flex items-center justify-center py-2 mb-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={handleClick}
         >
           Search
@@ -100,8 +112,7 @@ export default function Form() {
         <button
           type="submit"
           id="buttonFavorite"
-          className="inline-flex items-center justify-center px-4 py-2 mb-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:text-indigo-600
-        hover:bg-amber-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="md:w-36 inline-flex items-center justify-center py-2 mb-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={handleClick}
         >
           Add to favorites

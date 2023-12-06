@@ -4,6 +4,7 @@ export const CityContext = createContext();
 
 export const CityContextProvider = ({ children }) => {
   const [city, setCity] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [cityData, setCityData] = useState(null);
   const [favoriteCities, setFavoriteCities] = useState(
     JSON.parse(localStorage.getItem("favoriteCities")) || []
@@ -12,6 +13,8 @@ export const CityContextProvider = ({ children }) => {
   const value = {
     city,
     setCity,
+    isLoading,
+    setIsLoading,
     cityData,
     setCityData,
     favoriteCities,
