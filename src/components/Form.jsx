@@ -8,54 +8,57 @@ import { CityContext } from "../contexts/cityContext.jsx";
 export default function Form() {
   const [buttonClick, setButtonClick] = useState("buttonFetch");
 
-  const {
-    city,
-    setCity,
-    cityData,
-    setCityData,
-    setIsLoading,
-    favoriteCities,
-    setFavoriteCities,
-  } = useContext(CityContext);
+  const { city, setCity, setCityData, favoriteCities, setFavoriteCities } =
+    useContext(CityContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (city) {
       // First button : API call
       if (buttonClick === "buttonFetch") {
-        fetchCityData(city, setCityData, setIsLoading, toast);
+        try {
+          const data = await fetchCityData(city);
+          setCityData(data);
+        } catch (error) {
+          console.error("Error fetching city data:", error);
+          setIsLoading(false);
+        }
       }
 
       /// Second button : Add to favorites
       else {
-        if (!cityData) {
-          toast.error("Use 'Search' button first before adding a city.");
-          return;
-        }
+        // First, check if city exists
+        const data = await fetchCityData(city);
+        if (data == undefined) return; // Error message displayed from API call
+
+        // Check if city has not already been saved in favorites
         // Reminder : indexOf() returns -1 when searched element is not in array
         if (favoriteCities.indexOf(city) !== -1) {
-          toast.error("You already saved this city in your Favorites list !");
+          toast.error("You already saved this city in your list !");
         } else {
           if (favoriteCities.length === 3) {
             toast.error(
               "You can't save more than three cities in your Favorites list !"
             );
           } else {
-            const copyFavoriteCities = [...favoriteCities, city];
+            // Finally, if valid city name, you can add city to your list
+            if (data !== undefined) {
+              const copyFavoriteCities = [...favoriteCities, city];
 
-            // Update state of favoriteCities
-            setFavoriteCities(copyFavoriteCities);
+              // Update state of favoriteCities
+              setFavoriteCities(copyFavoriteCities);
 
-            // Update LS
-            localStorage.setItem(
-              "favoriteCities",
-              JSON.stringify(copyFavoriteCities)
-            );
-            toast.success("The city has been added to your Favorites list.");
+              // Update LS
+              localStorage.setItem(
+                "favoriteCities",
+                JSON.stringify(copyFavoriteCities)
+              );
+              toast.success("The city has been added to your Favorites list.");
 
-            // Reset form
-            setCity("");
+              // Reset form
+              setCity("");
+            }
           }
         }
       }

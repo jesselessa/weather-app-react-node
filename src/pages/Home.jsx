@@ -8,7 +8,7 @@ import CityCard from "../components/CityCard.jsx";
 import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Home() {
-  const { isLoading, cityData } = useContext(CityContext);
+  const { cityData } = useContext(CityContext);
 
   return (
     <div className="container mx-auto min-h-fit flex flex-col justify-between p-3">
@@ -19,17 +19,7 @@ export default function Home() {
       <Form />
 
       <div className="flex flex-col justify-around items-center m-4">
-        {cityData ? (
-          <>
-            {isLoading ? (
-              <p className="text-center text-lg">Loading...</p>
-            ) : (
-              <CityCard />
-            )}
-          </>
-        ) : (
-          <>{null}</>
-        )}
+        {cityData && <CityCard cityInfo={cityData} />}
       </div>
     </div>
   );

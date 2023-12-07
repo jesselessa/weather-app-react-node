@@ -1,22 +1,21 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 
-// Context
-import { CityContext } from "../contexts/cityContext.jsx";
+// // Context
+// import { CityContext } from "../contexts/cityContext.jsx";
 
-export default function CityCard({ cityName, showRemoveButton, onRemove }) {
-  const { cityData } = useContext(CityContext);
-
+export default function CityCard({ cityInfo, showRemoveButton, onRemove }) {
+  // const { cityData } = useContext(CityContext);
   return (
     <>
-      {cityData && (
+      {cityInfo && (
         <div className="max-w-xs rounded overflow-hidden shadow-lg mb-5 p-3">
           <h3 className="text-center text-xl font-bold mb-2">
-            {cityData.name}, {cityData.sys?.country}
+            {cityInfo.name}, {cityInfo.sys?.country}
           </h3>
 
           <img
             className="w-24 mx-auto"
-            src={`http://openweathermap.org/img/wn/${cityData.weather[0]?.icon}@2x.png`}
+            src={`http://openweathermap.org/img/wn/${cityInfo.weather[0]?.icon}@2x.png`}
             alt="weather"
           />
 
@@ -25,15 +24,16 @@ export default function CityCard({ cityName, showRemoveButton, onRemove }) {
               <span className="text-gray-700 font-bold text-base">
                 Temperature&nbsp;:
               </span>{" "}
-              {Math.round(cityData.main?.temp)}&nbsp;°&nbsp;C <br />
-              (Min : {Math.round(cityData.main?.temp_min)}&nbsp;°&nbsp;C ,
-              Max&nbsp;: {Math.round(cityData.main?.temp_max)}&nbsp;°&nbsp;C)
+              {Math.round(cityInfo.main?.temp)}&nbsp;°&nbsp;C <br />
+              (Min : {Math.round(cityInfo.main?.temp_min)}&nbsp;°&nbsp;C ,
+              Max&nbsp;: {Math.round(cityInfo.main?.temp_max)}
+              &nbsp;°&nbsp;C)
             </p>
             <p>
               <span className="text-gray-700 font-bold text-base">
                 Description :
               </span>{" "}
-              {cityData.weather[0]?.main}
+              {cityInfo.weather[0]?.main}
             </p>
           </div>
 
