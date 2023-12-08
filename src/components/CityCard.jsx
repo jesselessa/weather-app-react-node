@@ -1,4 +1,10 @@
-export default function CityCard({ cityInfo, showRemoveButton, onRemove }) {
+export default function CityCard({
+  cityInfo,
+  onRemove,
+  showRemoveButton,
+  showDefaultCityButton,
+  chooseAsDefaultCity,
+}) {
   const { name, main, weather, sys } = cityInfo;
 
   return (
@@ -34,7 +40,19 @@ export default function CityCard({ cityInfo, showRemoveButton, onRemove }) {
           </div>
 
           <div className="flex justify-center ">
-            {/*Btn remove favorite */}
+            {/*Btn choose default city */}
+            {showDefaultCityButton && (
+              <div className="py-3 flex justify-center">
+                <button
+                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium  bg-amber-500 text-white
+                  hover:text-indigo-600 hover:bg-amber-300"
+                  onClick={chooseAsDefaultCity}
+                >
+                  Choose as default city
+                </button>
+              </div>
+            )}
+            {/*Btn remove favorite city */}
             {showRemoveButton && (
               <div className="py-3 flex justify-center">
                 <button

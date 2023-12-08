@@ -1,14 +1,47 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { fetchCityData } from "../utils/callAPI.js";
 
 // Components
 import Form from "../components/Form.jsx";
+
+// Component
 import CityCard from "../components/CityCard.jsx";
 
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Home() {
-  const { cityData } = useContext(CityContext);
+  const { cityData, setCityData } = useContext(CityContext);
+
+  const [defaultCityName, setDefaultCityName] = useState(
+    JSON.parse(localStorage.getItem("defaultCity")) || ""
+  );
+
+  useEffect(() => {
+    fetchDefaultCityData();
+  }, [defaultCityName]);
+
+  const fetchDefaultCityData = async () => {
+    if (defaultCityName) {
+      try {
+        const data = await fetchCityData(defaultCityName);
+
+        // Update city data
+        setCityData(data);
+      } catch (error) {
+        console.error("Error fetching default city data:", error);
+      }
+    }
+  };
+
+  const chooseAsDefaultCity = () => {
+    // Update default city name in localStorage and state
+    const cityName = cityData.name;
+    localStorage.setItem("defaultCity", JSON.stringify(cityName));
+    setDefaultCityName(cityName);
+    toast.success(`${cityName} has been added as city by default.`);
+  };
 
   return (
     <div className="container mx-auto min-h-fit flex-1 flex flex-col justify-center items-center p-3">
@@ -18,9 +51,15 @@ export default function Home() {
         </h2>
         <Form />
         <div className="flex flex-col justify-around items-center m-4">
-          {cityData && <CityCard cityInfo={cityData} />}
+          {cityData && (
+            <CityCard
+              cityInfo={cityData}
+              showDefaultCityButton={true}
+              chooseAsDefaultCity={chooseAsDefaultCity}
+            />
+          )}
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
 }

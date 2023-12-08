@@ -51,7 +51,7 @@ export default function Form() {
               );
 
               toast.success("The city has been added to your favorites list.");
-              // Reset form
+              // Reset form and data
               setCity("");
             }
           }
