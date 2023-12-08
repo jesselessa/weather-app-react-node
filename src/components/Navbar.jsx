@@ -3,6 +3,8 @@ import { useLocation, Link } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 // Icons
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+// Logo
+import logo from "../assets/sun-48.png";
 
 export default function Navbar() {
   // Get current location object of the page
@@ -41,7 +43,8 @@ export default function Navbar() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                    src={logo}
+                    // src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                     alt="logo"
                   />
                   <h1 className="hidden lg:block h-8 ml-3 text-white font-bold justify-center align-middle py-1">
