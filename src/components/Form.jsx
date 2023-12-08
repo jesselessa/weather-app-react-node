@@ -17,13 +17,8 @@ export default function Form() {
     if (city) {
       // First button : API call
       if (buttonClick === "buttonFetch") {
-        try {
-          const data = await fetchCityData(city);
-          setCityData(data);
-        } catch (error) {
-          console.error("Error fetching city data:", error);
-          setIsLoading(false);
-        }
+        const data = await fetchCityData(city);
+        setCityData(data);
       }
 
       /// Second button : Add to favorites
@@ -32,7 +27,7 @@ export default function Form() {
         const data = await fetchCityData(city);
         if (data == undefined) return; // Error message displayed from API call
 
-        // Check if city has not already been saved in favorites
+        // Check if city has not already been saved
         // Reminder : indexOf() returns -1 when searched element is not in array
         if (favoriteCities.indexOf(city) !== -1) {
           toast.error("You already saved this city in your list !");
@@ -42,20 +37,20 @@ export default function Form() {
               "You can't save more than three cities in your Favorites list !"
             );
           } else {
-            // Finally, if valid city name, you can add city to your list
+            // Finally, if city name is valid, copy of favorites
             if (data !== undefined) {
               const copyFavoriteCities = [...favoriteCities, city];
 
               // Update state of favoriteCities
               setFavoriteCities(copyFavoriteCities);
 
-              // Update LS
+              // Update localStorage
               localStorage.setItem(
                 "favoriteCities",
                 JSON.stringify(copyFavoriteCities)
               );
-              toast.success("The city has been added to your Favorites list.");
 
+              toast.success("The city has been added to your favorites list.");
               // Reset form
               setCity("");
             }
@@ -72,7 +67,6 @@ export default function Form() {
   };
 
   const handleClick = (e) => {
-    // Change by ID
     setButtonClick(e.target.id);
   };
 

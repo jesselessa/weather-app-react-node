@@ -9,99 +9,87 @@ import CityCard from "../components/CityCard.jsx";
 import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Favorites() {
-  const { setCityData, favoriteCities, setFavoriteCities } =
-    useContext(CityContext);
+  const { favoriteCities, setFavoriteCities } = useContext(CityContext);
 
   const navigate = useNavigate();
 
-  const [favFetchedData, setFavFetchedData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [favListData, setFavListData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // // Fetch data from localStorage on component mount
-  // useEffect(() => {
-  //   const storedFavorites = JSON.parse(localStorage.getItem("favoriteCities"));
-  //   console.log("Stored favorites:", storedFavorites);
+  // Fetch data from localStorage on component mount
+  const fetchFavListData = async () => {
+    const promises = favoriteCities.map((city) => fetchCityData(city));
 
-  //   if (storedFavorites && Array.isArray(storedFavorites)) {
-  //     // Update data for every favorite city
-  //     storedFavorites.forEach(async (city) => {
-  //       const data = await fetchCityData(city, setCityData, setIsLoading);
-  //       console.log("Data Favorites:", data);
-  //       setFavFetchedData(data);
-  //       setIsLoading(false);
-  //     });
-
-  //     setFavoriteCities(storedFavorites);
-  //   }
-  // }, [setCityData, setFavoriteCities, setIsLoading]);
+    try {
+      setIsLoading(true); // Start of loading
+      const data = await Promise.all(promises);
+      setFavListData(data);
+    } catch (error) {
+      console.error("Error fetching data for favorites:", error);
+    } finally {
+      setIsLoading(false); // End of loading wheter success or not
+    }
+  };
 
   useEffect(() => {
     if (favoriteCities.length !== 0) {
-      setIsLoading(true);
-      fetchFavCities();
+      fetchFavListData();
     }
   }, [favoriteCities]);
 
-  const fetchFavCities = async () => {
-    const promises = [];
-
-    favoriteCities.forEach((city) =>
-      promises.push(fetchCityData(city, setCityData))
-    );
-
-    await Promise.all(promises).then((res) => setFavFetchedData(res));
-    setIsLoading(false);
-  };
-
   // Remove favorite button
-  const removeFromFavorites = (cityName) => {
-    const updatedFavorites = favoriteCities.filter((city) => city !== cityName);
-    setFavoriteCities(updatedFavorites);
+  const removeFromFavorites = (cityIndex) => {
+    const copyFavoriteCities = [...favoriteCities];
+    copyFavoriteCities.splice(cityIndex, 1);
+
+    // Update state
+    setFavoriteCities(copyFavoriteCities);
 
     // Update LS after state modification
-    localStorage.setItem("favoriteCities", JSON.stringify(updatedFavorites));
+    localStorage.setItem("favoriteCities", JSON.stringify(copyFavoriteCities));
   };
 
-  if (isLoading) return <p className="text-center text-lg">Loading...</p>;
-
   return (
-    <div className="container mx-auto min-h-fit flex flex-col justify-around items-center p-3">
-      <h2 className="text-2xl text-center font-bold mb-5">
-        Your favorite cities
-      </h2>
+    <>
+      {isLoading ? (
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-center text-lg">Loading...</p>
+        </div>
+      ) : (
+        <div className="container mx-auto min-h-fit flex-1 flex flex-col justify-around items-center p-3">
+          {favoriteCities.length !== 0 ? (
+            <>
+              <h2 className="text-2xl text-center font-bold mb-8 py-2">
+                Your favorite cities
+              </h2>
 
-      <div className="flex flex-col lg:flex-row justify-around items-center px-2 py-3">
-        {favoriteCities.length > 0 ? (
-          <div className="flex flex-col items-center">
-            <p className="text-center mb-5">No favorite city added yet</p>
+              <div className="flex flex-col lg:flex-row justify-around gap-y:8 lg:gap-x-8">
+                {favListData.map((favCityData, index) => {
+                  return (
+                    <CityCard
+                      key={index}
+                      cityInfo={favCityData}
+                      onRemove={() => removeFromFavorites(index)}
+                      showRemoveButton={true}
+                    />
+                  );
+                })}
+              </div>
+            </>
+          ) : (
+            <div className=" flex-1 flex flex-col justify-center items-center gap-y-6">
+              <p>No favorite city added yet</p>
 
-            <button
-              type="button"
-              className="w-full md:w-60 inline-flex justify-center items-center  py-2 border border-transparent rounded-md shadow-sm text-sm font-medium  text-indigo-600 bg-amber-300  hover:bg-indigo-600 hover:text-white"
-              // id="buttonFavorite"
-              onClick={() => navigate("/")}
-            >
-              Back to homepage
-            </button>
-          </div>
-        ) : (
-          <div className="py-3 flex flex-col justify-between lg:flex-row lg:justify-around lg:gap-x-8">
-            {favFetchedData.map((favCityData, index) => {
-              return (
-                <CityCard
-                  key={index}
-                  id={index}
-                  data={favCityData}
-                  onRemove={() => removeFromFavorites(favCityData.name)}
-                  showRemoveButton={true}
-                />
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </div>
+              <button
+                className="w-full md:w-48 inline-flex justify-center items-center  py-2 border border-transparent rounded-md shadow-sm text-sm font-medium  text-indigo-600 bg-amber-300  hover:bg-indigo-600 hover:text-white"
+                onClick={() => navigate("/")}
+              >
+                Back to homepage
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 }
-
-

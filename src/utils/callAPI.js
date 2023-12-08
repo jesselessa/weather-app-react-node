@@ -13,9 +13,9 @@ export const fetchCityData = async (city) => {
     const data = await res.json();
 
     if (data.cod === "404") {
+      console.error(data.message);
       toast.error("Enter a valid city name.");
     } else {
-      console.log("CityData:", data);
       return data;
     }
   } catch (error) {
