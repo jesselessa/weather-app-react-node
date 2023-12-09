@@ -13,7 +13,7 @@ import CityCard from "../components/CityCard.jsx";
 import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Home() {
-  const { cityData, setCityData } = useContext(CityContext);
+  const { cityData, setCityData} = useContext(CityContext);
 
   const [defaultCityName, setDefaultCityName] = useState(
     JSON.parse(localStorage.getItem("defaultCity")) || ""
