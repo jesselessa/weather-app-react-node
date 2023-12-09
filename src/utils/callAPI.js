@@ -7,7 +7,8 @@ export const fetchCityData = async (city) => {
     const res = await fetch(url);
 
     if (!res.ok) {
-      throw res;
+      const errorMessage = await res.text();
+      throw new Error(errorMessage);
     }
 
     const data = await res.json();
