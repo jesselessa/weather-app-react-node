@@ -28,6 +28,13 @@ export default function Form() {
       try {
         const data = await fetchCityData(city);
 
+        // Reset input if data is not available
+        if (!data) {
+          setCity("");
+          toast.error("Enter a valid city name.");
+          return;
+        }
+
         // First button : API call
         if (buttonClick === "buttonFetch") {
           // Update city data
@@ -37,8 +44,7 @@ export default function Form() {
         // Second button : Add to favorites
         else {
           // First, check if city data exists before going further
-          if (data === undefined) {
-            // Error message displayed from API call
+          if (!data) {
             return;
           }
 
@@ -71,6 +77,9 @@ export default function Form() {
         }
       } catch (error) {
         console.error("Failed to fetch city data:", error);
+        toast.error("Failed to fetch city data. Please try again.");
+        // Reset input if error
+        setCity("");
       }
     } else {
       toast.error("Enter a city name in the input field.");
