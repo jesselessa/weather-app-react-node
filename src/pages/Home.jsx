@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { fetchCityData } from "../utils/callAPI.js";
+import { updateLocalStorage } from "../utils/updateLocalStorage.js";
 
 // Components
 import Form from "../components/Form.jsx";
@@ -25,10 +26,10 @@ export default function Home() {
   const fetchDefaultCityData = async () => {
     if (defaultCityName) {
       try {
-        const data = await fetchCityData(defaultCityName);
+        const defaultCityData = await fetchCityData(defaultCityName);
 
         // Update city data
-        setCityData(data);
+        setCityData(defaultCityData);
       } catch (error) {
         console.error("Error fetching default city data:", error);
       }
@@ -38,7 +39,7 @@ export default function Home() {
   const chooseAsDefaultCity = () => {
     // Update default city name in localStorage and state
     const cityName = cityData.name;
-    localStorage.setItem("defaultCity", JSON.stringify(cityName));
+    updateLocalStorage("defaultCity", cityName);
     setDefaultCityName(cityName);
     toast.success(`${cityName} has been added as city by default.`);
   };
@@ -51,7 +52,7 @@ export default function Home() {
         </h2>
         <Form />
         <div className="flex flex-col justify-around items-center m-4">
-          {cityData && (
+          {cityData?.name && (
             <CityCard
               cityInfo={cityData}
               showDefaultCityButton={true}

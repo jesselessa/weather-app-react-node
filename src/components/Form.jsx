@@ -1,6 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { fetchCityData } from "../utils/callAPI.js";
+import { updateLocalStorage } from "../utils/updateLocalStorage.js";
 
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";
@@ -11,51 +13,64 @@ export default function Form() {
   const { city, setCity, setCityData, favoriteCities, setFavoriteCities } =
     useContext(CityContext);
 
+  // Get URL of current page
+  const { pathname } = useLocation();
+
+  // Reset input value when page changes
+  useEffect(() => {
+    setCity("");
+  }, [pathname]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (city) {
-      // First button : API call
-      if (buttonClick === "buttonFetch") {
+      try {
         const data = await fetchCityData(city);
-        setCityData(data);
-      }
 
-      /// Second button : Add to favorites
-      else {
-        // First, check if city exists
-        const data = await fetchCityData(city);
-        if (data == undefined) return; // Error message displayed from API call
+        // First button : API call
+        if (buttonClick === "buttonFetch") {
+          // Update city data
+          setCityData(data);
+        }
 
-        // Check if city has not already been saved
-        // Reminder : indexOf() returns -1 when searched element is not in array
-        if (favoriteCities.indexOf(city) !== -1) {
-          toast.error("You already saved this city in your list !");
-        } else {
-          if (favoriteCities.length === 3) {
+        // Second button : Add to favorites
+        else {
+          // First, check if city data exists before going further
+          if (data === undefined) {
+            // Error message displayed from API call
+            return;
+          }
+
+          // Check if city has not already been saved
+          if (favoriteCities.includes(data.name)) {
             toast.error(
-              "You can't save more than three cities in your Favorites list !"
+              `You already saved ${data.name} in your favorites list`
             );
           } else {
-            // Finally, if city name is valid, copy of favorites
-            if (data !== undefined) {
-              const copyFavoriteCities = [...favoriteCities, city];
+            if (favoriteCities.length === 3) {
+              toast.error(
+                "You can't save more than three cities in your favorites list !"
+              );
+            }
+            // Finally, if city name is valid, add it to a copy of favorites
+            else {
+              const copyFavoriteCities = [...favoriteCities, data.name];
 
-              // Update state of favoriteCities
+              // Update  state of favoriteCities
               setFavoriteCities(copyFavoriteCities);
 
               // Update localStorage
-              localStorage.setItem(
-                "favoriteCities",
-                JSON.stringify(copyFavoriteCities)
-              );
+              updateLocalStorage("favoriteCities", copyFavoriteCities);
 
-              toast.success("The city has been added to your favorites list.");
-              // Reset form and data
-              setCity("");
+              toast.success(
+                `${data.name} has been added to your list of favorite cities.`
+              );
             }
           }
         }
+      } catch (error) {
+        console.error("Failed to fetch city data:", error);
       }
     } else {
       toast.error("Enter a city name in the input field.");
@@ -90,7 +105,7 @@ export default function Form() {
           id="city"
           name="city"
           placeholder="Enter a city name"
-          value={city.toLowerCase()}
+          value={city}
           onChange={handleChange}
           autoComplete="off"
         />

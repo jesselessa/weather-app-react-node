@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchCityData } from "../utils/callAPI.js";
+import { updateLocalStorage } from "../utils/updateLocalStorage.js";
 
 // Component
 import CityCard from "../components/CityCard.jsx";
@@ -11,10 +12,10 @@ import { CityContext } from "../contexts/cityContext.jsx";
 export default function Favorites() {
   const { favoriteCities, setFavoriteCities } = useContext(CityContext);
 
-  const navigate = useNavigate();
-
   const [favListData, setFavListData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   // Fetch data from localStorage on component mount
   const fetchFavListData = async () => {
@@ -46,7 +47,7 @@ export default function Favorites() {
     setFavoriteCities(copyFavoriteCities);
 
     // Update LS after state modification
-    localStorage.setItem("favoriteCities", JSON.stringify(copyFavoriteCities));
+    updateLocalStorage("favoriteCities", copyFavoriteCities);
   };
 
   return (
