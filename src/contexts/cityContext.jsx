@@ -8,6 +8,10 @@ export const CityContextProvider = ({ children }) => {
   const [favoriteCities, setFavoriteCities] = useState(
     JSON.parse(localStorage.getItem("favoriteCities")) || []
   );
+  const [defaultCity, setDefaultCity] = useState(
+    JSON.parse(localStorage.getItem("defaultCity")) || ""
+  );
+  const [isDefaultCity, setIsDefaultCity] = useState(false);
 
   const value = {
     city,
@@ -16,6 +20,10 @@ export const CityContextProvider = ({ children }) => {
     setCityData,
     favoriteCities,
     setFavoriteCities,
+    defaultCity,
+    setDefaultCity,
+    isDefaultCity,
+    setIsDefaultCity,
   };
 
   return <CityContext.Provider value={value}>{children}</CityContext.Provider>;

@@ -22,30 +22,34 @@ import squall from "../assets/bgImages/squall.jpg";
 import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Home() {
-  const { cityData, setCityData } = useContext(CityContext);
+  const {
+    cityData,
+    setCityData,
+    isDefaultCity,
+    setIsDefaultCity,
+    defaultCity,
+    setDefaultCity,
+  } = useContext(CityContext);
 
-  const [defaultCityName, setDefaultCityName] = useState(
-    JSON.parse(localStorage.getItem("defaultCity")) || ""
-  );
   const [imgUrl, setImgUrl] = useState(null);
 
   useEffect(() => {
     fetchDefaultCityData();
-  }, [defaultCityName]);
+  }, [defaultCity, isDefaultCity]);
 
   useEffect(() => {
     const weather = cityData?.weather[0]?.main;
-    console.log("Weather:", weather);
     changeWeatherBgImg(weather);
   }, [cityData]);
 
   const fetchDefaultCityData = async () => {
-    if (defaultCityName) {
+    if (defaultCity) {
       try {
-        const defaultCityData = await fetchCityData(defaultCityName);
+        const defaultCityData = await fetchCityData(defaultCity);
 
         // Update city data
         setCityData(defaultCityData);
+        setIsDefaultCity(true);
       } catch (error) {
         console.error("Error fetching default city data:", error);
       }
@@ -56,8 +60,27 @@ export default function Home() {
     // Update default city name in localStorage and state
     const cityName = cityData.name;
     updateLocalStorage("defaultCity", cityName);
-    setDefaultCityName(cityName);
+    setDefaultCity(cityName);
     toast.success(`${cityName} has been added as city by default.`);
+  };
+
+  // Handle default city button
+  const handleDefaultCityClick = () => {
+    const cityName = cityData.name;
+
+    if (isDefaultCity && defaultCity === cityName) {
+      // defaultCity === cityName : otherwise, every card could access this feature as long as a key is stored in localStorage
+      localStorage.removeItem("defaultCity");
+      setDefaultCity("");
+      setIsDefaultCity(false);
+      toast.success(`${cityName} has been removed as default city.`);
+    } else {
+      // Choose as default city
+      updateLocalStorage("defaultCity", cityName);
+      setDefaultCity(cityName);
+      setIsDefaultCity(true);
+      toast.success(`${cityName} has been added as default city.`);
+    }
   };
 
   // Change background image according to weather
@@ -116,6 +139,7 @@ export default function Home() {
               cityInfo={cityData}
               showDefaultCityButton={true}
               chooseAsDefaultCity={chooseAsDefaultCity}
+              handleDefaultCityClick={handleDefaultCityClick}
             />
           )}
         </div>

@@ -54,7 +54,7 @@ export default function Favorites() {
 
     // Update LS after state modification
     updateLocalStorage("favoriteCities", updatedFavorites);
-    toast.success("City removed from favorites.");
+    toast.success(`${cityName} has been removed from your favorites list.`);
   };
 
   // // Alernative function using index
@@ -67,15 +67,15 @@ export default function Favorites() {
 
   return (
     <div
-      className="min-h-fit flex-1 flex flex-col md:justify-around items-center p-3"
+      className="min-h-fit flex-1 flex flex-col md:justify-around items-center p-3 bg-cover bg-center"
       style={{ backgroundImage: `url(${clear})` }}
     >
       {isLoading ? (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex-1 flex flex-col justify-center items-center">
           <p className="text-lg text-center font-medium">Loading...</p>
         </div>
       ) : (
-        <div className="container flex flex-col justify-around items-center ">
+        <div className="container flex-1 flex flex-col justify-around items-center ">
           {favoriteCities.length !== 0 ? (
             <>
               <h2 className="text-2xl text-slate-900 text-center font-bold mb-8 py-2">

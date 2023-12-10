@@ -1,10 +1,17 @@
+import { useContext } from "react";
+
+// Context
+import { CityContext } from "../contexts/cityContext.jsx";
+
 export default function CityCard({
   cityInfo,
   onRemove,
   showRemoveButton,
   showDefaultCityButton,
-  chooseAsDefaultCity,
+  handleDefaultCityClick,
 }) {
+  const { defaultCity, isDefaultCity } = useContext(CityContext);
+
   const { name, main, weather, sys } = cityInfo;
 
   return (
@@ -46,9 +53,11 @@ export default function CityCard({
                 <button
                   className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium bg-orange-500 text-white
                   hover:text-indigo-600 hover:bg-amber-300"
-                  onClick={chooseAsDefaultCity}
+                  onClick={handleDefaultCityClick}
                 >
-                  Choose as default city
+                  {isDefaultCity && defaultCity === cityInfo.name
+                    ? "Remove as default city"
+                    : "Choose as default city"}
                 </button>
               </div>
             )}
