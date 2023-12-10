@@ -2,9 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchCityData } from "../utils/callAPI.js";
 import { updateLocalStorage } from "../utils/updateLocalStorage.js";
+import { toast } from "react-toastify";
 
 // Component
 import CityCard from "../components/CityCard.jsx";
+
+// Image
+import clear from "../assets/bgImages/clear.jpg";
 
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";
@@ -39,38 +43,53 @@ export default function Favorites() {
   }, [favoriteCities]);
 
   // Remove favorite button
-  const removeFromFavorites = (cityIndex) => {
+  const removeFromFavorites = (cityName) => {
     const copyFavoriteCities = [...favoriteCities];
-    copyFavoriteCities.splice(cityIndex, 1);
+    const updatedFavorites = copyFavoriteCities.filter(
+      (city) => city !== cityName
+    );
 
     // Update state
-    setFavoriteCities(copyFavoriteCities);
+    setFavoriteCities(updatedFavorites);
 
     // Update LS after state modification
-    updateLocalStorage("favoriteCities", copyFavoriteCities);
+    updateLocalStorage("favoriteCities", updatedFavorites);
+    toast.success("City removed from favorites.");
   };
 
+  // // Alernative function using index
+  // const removeFromFavorites = (cityIndex) => {
+  //   const copyFavoriteCities = [...favoriteCities];
+  //   copyFavoriteCities.splice(cityIndex, 1);
+  //   setFavoriteCities(copyFavoriteCities);
+  //   updateLocalStorage("favoriteCities", copyFavoriteCities);
+  // };
+
   return (
-    <>
+    <div
+      className="min-h-fit flex-1 flex flex-col md:justify-around items-center p-3"
+      style={{ backgroundImage: `url(${clear})` }}
+    >
       {isLoading ? (
         <div className="flex flex-col justify-center items-center">
-          <p className="text-center text-lg">Loading...</p>
+          <p className="text-lg text-center font-medium">Loading...</p>
         </div>
       ) : (
-        <div className="container mx-auto min-h-fit flex-1 flex flex-col justify-around items-center p-3">
+        <div className="container flex flex-col justify-around items-center ">
           {favoriteCities.length !== 0 ? (
             <>
-              <h2 className="text-2xl text-center font-bold mb-8 py-2">
+              <h2 className="text-2xl text-slate-900 text-center font-bold mb-8 py-2">
                 Your favorite cities
               </h2>
 
-              <div className="flex flex-col lg:flex-row justify-around gap-y:8 lg:gap-x-8">
+              <div className="w-full flex flex-col lg:flex-row justify-around items-center mb:5">
                 {favListData.map((favCityData, index) => {
                   return (
                     <CityCard
                       key={index}
                       cityInfo={favCityData}
-                      onRemove={() => removeFromFavorites(index)}
+                      onRemove={() => removeFromFavorites(favCityData.name)}
+                      // onRemove={() => removeFromFavorites(index)}
                       showRemoveButton={true}
                     />
                   );
@@ -78,8 +97,8 @@ export default function Favorites() {
               </div>
             </>
           ) : (
-            <div className=" flex-1 flex flex-col justify-center items-center gap-y-6">
-              <p>No favorite city added yet</p>
+            <div className="flex-1 flex flex-col justify-center items-center gap-y-6">
+              <p className="font-medium">No favorite city added yet</p>
 
               <button
                 className="w-full md:w-48 inline-flex justify-center items-center  py-2 border border-transparent rounded-md shadow-sm text-sm font-medium  text-indigo-600 bg-amber-300  hover:bg-indigo-600 hover:text-white"
@@ -91,6 +110,6 @@ export default function Favorites() {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }

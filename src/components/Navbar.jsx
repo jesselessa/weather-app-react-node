@@ -4,7 +4,7 @@ import { Disclosure } from "@headlessui/react";
 // Icons
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 // Logo
-import logo from "../assets/sun-48.png";
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
   // Get current location object of the page
@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     // Conditional display content based on visibility
-    <Disclosure as="nav" className="bg-sky-500">
+    <Disclosure as="nav" className="bg-cyan-950">
       {({ open }) => (
         <>
           {/* Desktop navigation */}

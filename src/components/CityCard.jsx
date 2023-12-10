@@ -10,8 +10,8 @@ export default function CityCard({
   return (
     <>
       {cityInfo && (
-        <div className="max-w-xs rounded overflow-hidden shadow-lg p-3 mb-5 lg:mb-0">
-          <h3 className="text-center text-xl font-bold mb-2">
+        <div className="max-w-xs rounded overflow-hidden shadow-lg p-3 mb-5 lg:mb-0 bg-white bg-opacity-50">
+          <h3 className="text-xl text-center text-slate-800 font-bold mb-2">
             {name}, {sys?.country}
           </h3>
 
@@ -44,7 +44,7 @@ export default function CityCard({
             {showDefaultCityButton && (
               <div className="py-3 flex justify-center">
                 <button
-                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium  bg-amber-500 text-white
+                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium bg-orange-500 text-white
                   hover:text-indigo-600 hover:bg-amber-300"
                   onClick={chooseAsDefaultCity}
                 >
