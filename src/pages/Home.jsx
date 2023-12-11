@@ -56,6 +56,19 @@ export default function Home() {
     }
   };
 
+  // Refresh city data every minute
+  useEffect(() => {
+    let interval;
+
+    if (cityData) {
+      interval = setInterval(() => fetchCityData(cityData.name), 60000);
+    }
+    return () => {
+      // Clean interval on component unmounting (e.g. every time user navigates between pages)
+      clearInterval(interval);
+    };
+  }, [cityData]);
+
   const chooseAsDefaultCity = () => {
     // Update default city name in localStorage and state
     const cityName = cityData.name;
