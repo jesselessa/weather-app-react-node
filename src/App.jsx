@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -13,14 +13,14 @@ function App() {
   return (
     <>
       <div className="min-h-screen flex flex-col justify-between">
-        <BrowserRouter>
+        <HashRouter basename="/weather-app-react-tailwind-client">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/favorites" element={<Favorites />} />
           </Routes>
           <Footer />
-        </BrowserRouter>
+        </HashRouter>
       </div>
       <ToastContainer autoClose={1500} draggable={false} />
     </>
