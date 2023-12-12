@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <div className="min-h-screen flex flex-col justify-between">
-        <BrowserRouter basename="/weather-app-react-tailwind-client">
+        <BrowserRouter>
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
