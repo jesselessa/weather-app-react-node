@@ -1,7 +1,8 @@
 {
   "name": "weather-app-react-tailwind-client",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "1.0.0",
+  "homepage": "https://jesselessa.github.io/weather-app-react-tailwind-client/",
   "type": "module",
   "scripts": {
     "dev": "vite",
