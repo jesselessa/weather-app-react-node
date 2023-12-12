@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import CityCard from "../components/CityCard.jsx";
 
 // Image
-import clear from "../assets/bgImages/clear.jpg";
+import clear from "../../public/assets/bgImages/clear.jpg";
 
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";

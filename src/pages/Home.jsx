@@ -8,15 +8,15 @@ import Form from "../components/Form.jsx";
 import CityCard from "../components/CityCard.jsx";
 
 // Images
-import clouds from "../assets/bgImages/clouds.jpg";
-import clear from "../assets/bgImages/clear.jpg";
-import rain from "../assets/bgImages/rain.jpg";
-import mist from "../assets/bgImages/mist.jpg";
-import snow from "../assets/bgImages/snow.jpg";
-import thunderstorm from "../assets/bgImages/thunderstorm.jpg";
-import tornado from "../assets/bgImages/tornado.jpg";
-import dust from "../assets/bgImages/dust.jpg";
-import squall from "../assets/bgImages/squall.jpg";
+import clouds from "../../public/assets/bgImages/clouds.jpg";
+import clear from "../../public/assets/bgImages/clear.jpg";
+import rain from "../../public/assets/bgImages/rain.jpg";
+import mist from "../../public/assets/bgImages/mist.jpg";
+import snow from "../../public/assets/bgImages/snow.jpg";
+import thunderstorm from "../../public/assets/bgImages/thunderstorm.jpg";
+import tornado from "../../public/assets/bgImages/tornado.jpg";
+import dust from "../../public/assets/bgImages/dust.jpg";
+import squall from "../../public/assets/bgImages/squall.jpg";
 
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";
