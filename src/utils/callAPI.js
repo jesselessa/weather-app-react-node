@@ -1,5 +1,5 @@
 export const fetchCityData = async (city) => {
-  const url = `http://localhost:5000/data/${city}`;
+  const url = `http://localhost:8000/data/${city}`;
 
   try {
     const res = await fetch(url);

@@ -133,6 +133,7 @@ export default function Home() {
         break;
       default:
         setImgUrl(clear);
+        break;
     }
   };
 

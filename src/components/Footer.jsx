@@ -4,7 +4,6 @@ export default function Footer() {
       <p>
         &copy; {new Date().getFullYear()} Jessica ELESSA - All rights reserved
       </p>
-      <p></p>
     </footer>
   );
 }
