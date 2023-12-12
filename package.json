@@ -2,12 +2,11 @@
   "name": "weather-app-react-tailwind-client",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://jesselessa.github.io/weather-app-react-tailwind-client/",
+  "homepage": "",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy": "npm run build && gh-pages -d dist",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
