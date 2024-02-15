@@ -33,6 +33,7 @@ The weather data are fetched from **OpenWeatherMap API**, whose documentation ca
 - Get weather data for any city in the world.
 - Save weather data of a favorite city.
 - Display weather data of a default city on the homepage.
+- Change background image depending on displayed city weather.
 
 ## Run the project locally
 
