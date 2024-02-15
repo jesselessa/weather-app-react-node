@@ -1,6 +1,6 @@
 # weather-app-react-tailwind-client
 
-This project is a weather application that can collect and save data for any city in the world. It has to be used in combination with [a custom API](https://github.com/jesselessa/weather-app-node-express-api).
+This project is a weather application that can collect and save data for any city in the world. It must be used in combination with [a custom API](https://github.com/jesselessa/weather-app-node-express-api).
 
 ## Table of Contents
 
@@ -20,9 +20,9 @@ You can see a live demo of the project [here](https://jesselessa-weather-app-rea
 
 ## Stack
 
-This project has been created with React using Vite Tool and Tailwind CSS.
+This project has been created with **React** using **Vite** Tool and **Tailwind CSS**.
 
-The weather data are fetched from OpenWeatherMap API, whose documentation can be found [here](https://openweathermap.org/api).
+The weather data are fetched from **OpenWeatherMap API**, whose documentation can be found [here](https://openweathermap.org/api).
 
 ## Screenshot
 
@@ -31,25 +31,55 @@ The weather data are fetched from OpenWeatherMap API, whose documentation can be
 ## Main features
 
 - Get weather data for any city in the world.
-- Save the weather data of a favorite city.
-- Display the weather data of a default city on the homepage.
+- Save weather data of a favorite city.
+- Display weather data of a default city on the homepage.
 
 ## Run the project locally
 
-1. Open your terminal and navigate to the location where you want the local repository to be copied.
-2. Clone the repository : `git clone https://github.com/jesselessaweather-app-react-tailwind-client.git`
+1. Open your terminal and navigate to the location where you want the local repository to be copied
+2. Clone the repository : `git clone https://github.com/jesselessa/weather-app-react-tailwind-client.git`
 3. Navigate to the project directory : `cd weather-app-react-tailwind-client`
 4. Inside the project directory :
-    - Run the application in development mode : `npm run dev`
-    - Open http://localhost:3000 in your web browser to view the development server.
+   - Run the application in development mode : `npm run dev`
+   - Open http://localhost:5173 in your web browser to view the live application
+
+Do not forget to run [the custom API](https://github.com/jesselessa/weather-app-node-express-api) alongside your project for it to work properly !
 
 ## Getting Started with Vite
 
+[Vite](https://vitejs.dev/) is a fast development tool for modern web applications. To get started with Vite, follow these simple steps :
+
+1. **Install Node.js and npm**
+
+Ensure you have Node.js and npm installed on your system. You can download and install them from the [official Node.js website](https://nodejs.org/en).
+
+2. **Initialize the project**
+
+If you have not already created a project, you can initialize a new project using the following command in your terminal : `npm init vite@latest my-project --template react`.
+
+This command will create a new directory named `my-project` and install a Vite project with a React template in it.
+
+3. **Install dependencies**
+
+Once the project is initialized, navigate to the newly created directory (`cd my-project`) and install the dependencies by running the command `npm install`.
+
+4. **Start the development server**
+
+To start the development server, use the command `npm run dev`.
+
+This will launch Vite and automatically open your default browser to http://localhost:5173, where you can see your live application.
+
+5. **Deploy to production**
+
+To build an optimized version of your application ready for production, use the command `npm run build`.
+
+This will generate a production-ready version of your application in the `dist` directory of your project.
 
 ## Contributing
 
-- If you are interested in contributing, explore the project structure in the 'src' folder and modules installed in the 'package.json' file.
-- Feel free to make improvements, fix bugs, or suggest new features. Contibutions are welcomed !
+If you are interested in contributing to the project, explore its structure in the `src` folder and modules installed in the `package.json` file.
+
+Feel free to make improvements, fix bugs, or suggest new features. Contributions are welcomed !
 
 ## Stay updated
 
