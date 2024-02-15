@@ -20,7 +20,7 @@ You can see a live demo of the project [here](https://jesselessa-weather-app-rea
 
 ## Stack
 
-This project has been created with **React** using **Vite** Tool and **Tailwind CSS**.
+This project has been created with **React** using **Vite** tool and **Tailwind CSS**.
 
 The weather data are fetched from **OpenWeatherMap API**, whose documentation can be found [here](https://openweathermap.org/api).
 
