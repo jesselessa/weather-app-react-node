@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import CityCard from "../components/CityCard.jsx";
 
 // Image
-import clear from "../../public/assets/bgImages/clear.jpg";
+import clear from "../assets/bgImages/clear.jpg";
 
 // Context
 import { CityContext } from "../contexts/cityContext.jsx";
@@ -89,7 +89,7 @@ export default function Favorites() {
                       key={index}
                       cityInfo={favCityData}
                       onRemove={() => removeFromFavorites(favCityData.name)}
-                      // onRemove={() => removeFromFavorites(index)}
+                      // onRemove={() => removeFromFavorites(index)} //// Alternative function
                       showRemoveButton={true}
                     />
                   );
