@@ -4,7 +4,7 @@ import { Disclosure } from "@headlessui/react";
 // Icons
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 // Logo
-import logo from "../../public/assets/logo.png";
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
   // Get current location object of the page
