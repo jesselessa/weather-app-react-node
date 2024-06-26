@@ -1,5 +1,7 @@
 export const fetchCityData = async (city) => {
-  const url = `http://localhost:8000/data/${city}`;
+  const url = `https://jesselessa-weather-app-api.onrender.com/data/${city}`;
+
+  // const url = `http://localhost:8000/data/${city}`;
 
   try {
     const res = await fetch(url);
