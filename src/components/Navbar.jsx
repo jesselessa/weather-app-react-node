@@ -44,7 +44,6 @@ export default function Navbar() {
                   <img
                     className="block h-8 w-auto"
                     src={logo}
-                    // src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                     alt="logo"
                   />
                   <h1 className="hidden lg:block h-8 ml-3 text-white font-bold justify-center align-middle py-1">
