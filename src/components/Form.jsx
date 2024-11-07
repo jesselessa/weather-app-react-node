@@ -133,7 +133,7 @@ export default function Form() {
         <button
           type="submit"
           id="buttonFavorite"
-          className="md:w-36 inline-flex items-center justify-center p-2 mb-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="md:w-36 inline-flex items-center justify-center p-2 mb-5 md:mb-0 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={handleClick}
         >
           Add to favorites
