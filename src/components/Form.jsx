@@ -8,7 +8,6 @@ import { updateLocalStorage } from "../utils/updateLocalStorage.js";
 import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Form() {
-  // const [buttonClick, setButtonClick] = useState("buttonFetch");
   const { city, setCity, setCityData, favoriteCities, setFavoriteCities } =
     useContext(CityContext);
 
@@ -35,8 +34,7 @@ export default function Form() {
           return;
         }
 
-        // First button : API call        
-        // if (buttonClick === "buttonFetch") {
+        // First button : API call
         if (e.target.id === "buttonFetch") {
           // Update city data
           setCityData(data);
@@ -49,25 +47,27 @@ export default function Form() {
             toast.error(
               `You already saved ${data.name} in your favorites list`
             );
-          } else {
-            // First, check number of favorite cities in localStorage (LS)
-            if (favoriteCities.length === 3) {
-              toast.error(
-                "You can't save more than three cities in your favorites list !"
-              );
-            }
-
-            // Then, create copy of LS and add city to list
-            const copyFavoriteCities = [...favoriteCities, data.name];
-
-            // Update 'favoriteCities' in LS
-            setFavoriteCities(copyFavoriteCities);
-            updateLocalStorage("favoriteCities", copyFavoriteCities);
-
-            toast.success(
-              `${data.name} has been added to your list of favorite cities.`
-            );
+            return;
           }
+
+          // Check number of favorite cities in localStorage (LS)
+          if (favoriteCities.length === 3) {
+            toast.error(
+              "You can't save more than three cities in your favorites list !"
+            );
+            return;
+          }
+
+          // Create copy of LS and add city to list
+          const copyFavoriteCities = [...favoriteCities, data.name];
+
+          // Update 'favoriteCities' in LS
+          setFavoriteCities(copyFavoriteCities);
+          updateLocalStorage("favoriteCities", copyFavoriteCities);
+
+          toast.success(
+            `${data.name} has been added to your list of favorite cities.`
+          );
         }
       } catch (error) {
         console.error("Failed to fetch city data:", error);
@@ -87,10 +87,6 @@ export default function Form() {
   const handleChange = (e) => {
     setCity(e.target.value);
   };
-
-  // const handleClick = (e) => {
-  //   setButtonClick(e.target.id);
-  // };
 
   return (
     <form onSubmit={handleSubmit} className="w-full md:w-1/2 mx-auto">
@@ -123,7 +119,6 @@ export default function Form() {
           type="submit"
           id="buttonFetch"
           className="md:w-36 inline-flex items-center justify-center p-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          // onClick={handleClick}
         >
           Search
         </button>
@@ -132,7 +127,6 @@ export default function Form() {
           type="submit"
           id="buttonFavorite"
           className="md:w-36 inline-flex items-center justify-center p-2 mb-5 md:mb-0 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          // onClick={handleClick}
         >
           Add to favorites
         </button>
