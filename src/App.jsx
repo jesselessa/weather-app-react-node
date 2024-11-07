@@ -18,16 +18,18 @@ function App() {
     <>
       {showOverlay && <OverlayMsg hideOverlay={() => setShowOverlay(false)} />}
 
-      <div className="min-h-screen flex flex-col justify-between">
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/favorites" element={<Favorites />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </div>
+      {!showOverlay && (
+        <div className="min-h-screen flex flex-col justify-between">
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/favorites" element={<Favorites />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        </div>
+      )}
 
       <ToastContainer autoClose={1500} draggable={false} />
     </>
