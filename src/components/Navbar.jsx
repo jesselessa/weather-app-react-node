@@ -8,6 +8,7 @@ import logo from "../assets/logo.png";
 export default function Navbar() {
   // Get current location object of the page
   const location = useLocation();
+  console.log("Navbar location:", location);
 
   // Define routes
   const routes = [
