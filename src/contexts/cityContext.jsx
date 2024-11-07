@@ -11,6 +11,7 @@ export const CityContextProvider = ({ children }) => {
   const [defaultCity, setDefaultCity] = useState(
     JSON.parse(localStorage.getItem("defaultCity")) || ""
   );
+
   const [isDefaultCity, setIsDefaultCity] = useState(false);
 
   const value = {
