@@ -17,7 +17,7 @@ export default function CityCard({
   return (
     <>
       {cityInfo && (
-        <div className="w-full md:w-96 min-h-80 md:h-96 rounded-md overflow-hidden shadow-lg p-3 mb-5 lg:mb-0 bg-white bg-opacity-50">
+        <div className="w-full md:w-80 min-h-80 md:h-96 flex flex-col gap-y-2 rounded-md overflow-hidden shadow-lg bg-white bg-opacity-50 p-3 mb-5 lg:mb-0">
           <h3 className="text-xl text-center text-slate-800 font-bold mb-2">
             {name},&nbsp;{sys?.country}
           </h3>

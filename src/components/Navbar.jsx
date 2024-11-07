@@ -1,9 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
-// UI
-import { Disclosure } from "@headlessui/react";
-// Icons
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-// Logo
+import { Disclosure } from "@headlessui/react"; // UI
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"; // Icons
+
+// Image
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
