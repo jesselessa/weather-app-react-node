@@ -47,9 +47,8 @@ export default function CityCard({
           </div>
 
           <div className="flex justify-center ">
-            {/*Btn choose default city */}
+            {/*Btn 'Choose default city' */}
             {showDefaultCityButton && (
-              // <div className="py-3 flex justify-center">
               <button
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium bg-orange-500 text-white
                   hover:text-indigo-600 hover:bg-amber-300"
@@ -59,19 +58,16 @@ export default function CityCard({
                   ? "Remove as default city"
                   : "Choose as default city"}
               </button>
-              // </div>
             )}
 
-            {/*Btn remove favorite city */}
+            {/*Btn 'Remove favorite city' */}
             {showRemoveButton && (
-              // <div className="py-3 flex justify-center">
               <button
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400"
                 onClick={onRemove}
               >
                 Remove from favorites
               </button>
-              // </div>
             )}
           </div>
         </div>
