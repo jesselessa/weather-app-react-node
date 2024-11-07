@@ -143,10 +143,12 @@ export default function Home() {
       style={{ backgroundImage: `url(${cityData ? imgUrl : clear})` }}
     >
       <div className="container flex flex-col justify-around">
-        <h2 className="text-2xl text-center text-slate-900 font-bold mb-3">
-          Get weather data from any city !
+        <h2 className="text-2xl text-center text-slate-900 font-bold mb-8">
+          Get weather data from any city&nbsp;!
         </h2>
+
         <Form />
+
         <div className="flex flex-col justify-around items-center ">
           {cityData?.name && (
             <CityCard

@@ -8,22 +8,21 @@ export default function OverlayMsg({ hideOverlay }) {
 
   return (
     <div
-      className="fixed inset-0 flex flex-col items-center justify-center p-2 z-[1001]"
+      className="fixed inset-0 flex flex-col items-center justify-center p-2 z-[1001] bg-cover bg-center"
       style={{ backgroundImage: `url(${clear})` }}
     >
-      <h1 className="text-[30px] text-[#008080] font-medium text-center mb-5">
+      <h1 className="text-[40px] text-cyan-950 font-medium text-center mb-5">
         DISCLAIMER
       </h1>
 
-      <p className="text-[20px] text-center max-w-[80%] mb-5">
-        When submitting your first request, you will have to wait about
-        50&nbsp;seconds before receiving a response. Note that the server sleeps
-        after 15 minutes of inactivity.
+      <p className="text-[20px] text-center max-w-[85%] mb-7">
+        When submitting your first request, you will have to wait between 30 and
+        60&nbsp;seconds before receiving a response. <br />
+        Note that the server sleeps after 15 minutes of inactivity.
       </p>
 
       <button
-        className="text-white text-[20px] py-1 px-3 rounded"
-        style={{ backgroundColor: " #008080" }}
+        className="text-white text-[20px] bg-cyan-950 py-2 px-5 rounded"
         onClick={accessApp}
       >
         ACCESS WEATHER APP

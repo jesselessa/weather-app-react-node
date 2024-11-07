@@ -15,7 +15,6 @@ import { CityContext } from "../contexts/cityContext.jsx";
 
 export default function Favorites() {
   const { favoriteCities, setFavoriteCities } = useContext(CityContext);
-
   const [favListData, setFavListData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -57,7 +56,7 @@ export default function Favorites() {
     toast.success(`${cityName} has been removed from your favorites list.`);
   };
 
-  // // Alernative function using index
+  // Alternative function using index
   // const removeFromFavorites = (cityIndex) => {
   //   const copyFavoriteCities = [...favoriteCities];
   //   copyFavoriteCities.splice(cityIndex, 1);
@@ -89,7 +88,7 @@ export default function Favorites() {
                       key={index}
                       cityInfo={favCityData}
                       onRemove={() => removeFromFavorites(favCityData.name)}
-                      // onRemove={() => removeFromFavorites(index)} //// Alternative function
+                      // onRemove={() => removeFromFavorites(index)} // Used with alternative function
                       showRemoveButton={true}
                     />
                   );

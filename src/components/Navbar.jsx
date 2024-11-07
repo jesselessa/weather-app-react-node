@@ -39,17 +39,16 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
+
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto"
-                    src={logo}
-                    alt="logo"
-                  />
+                  <img className="block h-8 w-auto" src={logo} alt="logo" />
+
                   <h1 className="hidden lg:block h-8 ml-3 text-white font-bold justify-center align-middle py-1">
                     WEATHER IN THE CITY
                   </h1>
                 </div>
+
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {routes.map((route) => (
