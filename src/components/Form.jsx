@@ -15,12 +15,13 @@ export default function Form() {
   // Get URL of current page
   const { pathname } = useLocation();
 
-  // Reset input value every time page changes
+  // Reset input and search result every time page changes
   useEffect(() => {
     setCity("");
+    setCityData(null);
   }, [pathname]);
 
-  // Handle form 
+  // Handle form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
