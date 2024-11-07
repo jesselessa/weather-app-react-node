@@ -82,7 +82,7 @@ export default function Home() {
     const cityName = cityData.name;
 
     if (isDefaultCity && defaultCity === cityName) {
-      // defaultCity === cityName : otherwise, every card could access this feature as long as a key is stored in localStorage
+      //! defaultCity === cityName : otherwise, every card could access this feature as long as a key is stored in localStorage
       localStorage.removeItem("defaultCity");
       setDefaultCity("");
       setIsDefaultCity(false);
