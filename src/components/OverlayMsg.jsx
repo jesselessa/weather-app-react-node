@@ -1,9 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 // Image
 import clear from "../assets/bgImages/clear.jpg";
 
 export default function OverlayMsg({ hideOverlay }) {
+  const navigate = useNavigate();
+
   const accessApp = () => {
     hideOverlay();
+    navigate("/");
   };
 
   return (

@@ -20,7 +20,7 @@ export default function Favorites() {
 
   const navigate = useNavigate();
 
-  // Fetch data from localStorage on component mount
+  // Fetch data from localStorage on component mounting
   const fetchFavListData = async () => {
     const promises = favoriteCities.map((city) => fetchCityData(city));
 
@@ -31,7 +31,7 @@ export default function Favorites() {
     } catch (error) {
       console.error("Error fetching data for favorites:", error);
     } finally {
-      setIsLoading(false); // End of loading wheter success or not
+      setIsLoading(false); // End of loading whether success or not
     }
   };
 
@@ -51,7 +51,7 @@ export default function Favorites() {
     // Update state
     setFavoriteCities(updatedFavorites);
 
-    // Update LS after state modification
+    // Update LS
     updateLocalStorage("favoriteCities", updatedFavorites);
     toast.success(`${cityName} has been removed from your favorites list.`);
   };
@@ -81,7 +81,7 @@ export default function Favorites() {
                 Your favorite cities
               </h2>
 
-              <div className="w-full flex flex-col lg:flex-row justify-around items-center mb:5">
+              <div className="w-full flex flex-col lg:flex-row lg:gap-x-5 justify-around items-center mb-5 lg:mb-0">
                 {favListData.map((favCityData, index) => {
                   return (
                     <CityCard

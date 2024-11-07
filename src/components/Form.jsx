@@ -65,7 +65,6 @@ export default function Form() {
           // Update 'favoriteCities' in LS
           setFavoriteCities(copyFavoriteCities);
           updateLocalStorage("favoriteCities", copyFavoriteCities);
-
           toast.success(
             `${data.name} has been added to your list of favorite cities.`
           );
