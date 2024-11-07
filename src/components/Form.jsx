@@ -20,7 +20,7 @@ export default function Form() {
     setCity("");
   }, [pathname]);
 
-  // Handle form buttons
+  // Handle form 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -89,6 +89,7 @@ export default function Form() {
     setCity(e.target.value);
   };
 
+  // Handle buttons click
   const handleClick = (e) => {
     setButton(e.target.id);
   };

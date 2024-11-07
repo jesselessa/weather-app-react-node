@@ -64,16 +64,17 @@ export default function Home() {
       interval = setInterval(() => fetchCityData(cityData.name), 60000);
     }
     return () => {
-      // Clean interval on component unmounting (e.g. every time user navigates between pages)
+      // Clean interval on component unmounting
       clearInterval(interval);
     };
   }, [cityData]);
 
   const chooseAsDefaultCity = () => {
-    // Update default city name in localStorage and state
+    // Update default city name state and LS
     const cityName = cityData.name;
-    updateLocalStorage("defaultCity", cityName);
     setDefaultCity(cityName);
+    updateLocalStorage("defaultCity", cityName);
+    
     toast.success(`${cityName} has been added as city by default.`);
   };
 
