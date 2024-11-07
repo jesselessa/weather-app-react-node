@@ -17,13 +17,11 @@ export default function CityCard({
   return (
     <>
       {cityInfo && (
-        <div className="w-full md:w-96 min-h-80 md:h-96 rounded overflow-hidden shadow-lg p-3 mb-5 lg:mb-0 bg-white bg-opacity-50">
-          {/* <div className="max-w-xs rounded overflow-hidden shadow-lg p-3 mb-5 lg:mb-0 bg-white bg-opacity-50"> */}
-
+        <div className="w-full md:w-96 min-h-80 md:h-96 rounded-md overflow-hidden shadow-lg p-3 mb-5 lg:mb-0 bg-white bg-opacity-50">
           <h3 className="text-xl text-center text-slate-800 font-bold mb-2">
-            {name}, {sys?.country}
+            {name},&nbsp;{sys?.country}
           </h3>
-min
+
           <img
             className="w-24 mx-auto"
             src={`http://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`}
@@ -63,6 +61,7 @@ min
                 </button>
               </div>
             )}
+
             {/*Btn remove favorite city */}
             {showRemoveButton && (
               <div className="py-3 flex justify-center">
