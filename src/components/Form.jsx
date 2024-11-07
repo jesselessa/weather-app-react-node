@@ -120,11 +120,11 @@ export default function Form() {
         />
       </div>
 
-      <div className="flex flex-col md:flex-row justify-around p-5 gap-x-3">
+      <div className="flex flex-col md:flex-row justify-around pt-5 gap-y-3">
         <button
           type="submit"
           id="buttonFetch"
-          className="md:w-36 inline-flex items-center justify-center py-2 mb-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="md:w-36 inline-flex items-center justify-center p-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={handleClick}
         >
           Search
@@ -133,7 +133,7 @@ export default function Form() {
         <button
           type="submit"
           id="buttonFavorite"
-          className="md:w-36 inline-flex items-center justify-center py-2 mb-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="md:w-36 inline-flex items-center justify-center p-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-amber-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={handleClick}
         >
           Add to favorites
