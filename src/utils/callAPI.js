@@ -1,10 +1,9 @@
 export const fetchCityData = async (city) => {
-  const url = `https://weather-app.jesselessa.dev/data/${city}`;
-  // const url = `https://weather-app-node-express-api.onrender.com/data/${city}`;
-  // const url = `http://localhost:8000/data/${city}`;
+  const apiUrl = `https://weather-app.jesselessa.dev/data/${city}`;
+  // const apiUrl = `http://localhost:8000/data/${city}`;
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(apiUrl);
 
     if (!res.ok) {
       const errorMessage = await res.text();
