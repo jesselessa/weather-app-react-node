@@ -1,6 +1,6 @@
 # weather-app-react-tailwind-client
 
-This project is a weather application that can collect and save data for any city in the world. It must be used in combination with [a custom API](https://github.com/jesselessa/weather-app-node-express-api).
+This project is a weather application for collecting and saving any city data. It must be used in combination with a custom API, the code of which can be found [here](https://github.com/jesselessa/weather-app-node-express-api).
 
 ## Table of Contents
 
