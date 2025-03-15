@@ -1,5 +1,5 @@
 export const fetchCityData = async (city) => {
-  const apiUrl = `https://weather-app.jesselessa.dev/data/${city}`;
+  const apiUrl = `https://weather-app.jesselessa.dev/api/data/${city}`;
   // const apiUrl = `http://localhost:8000/data/${city}`;
 
   try {
