@@ -1,8 +1,8 @@
 {
-  "name": "weather-app-react-tailwind-client",
+  "name": "weather-app-react-node",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://jesselessa-weather-app-react-tailwind.netlify.app/",
+  "homepage": "https://weather-app.jesselessa.dev",
   "type": "module",
   "scripts": {
     "dev": "vite",

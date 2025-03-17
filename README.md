@@ -1,11 +1,13 @@
-# weather-app-react-tailwind-client
+# weather-app-react-node
 
-This project is a weather application that can collect and save data for any city in the world. It must be used in combination with [a custom API](https://github.com/jesselessa/weather-app-node-express-api).
+This project is a weather application that can collect and save data for any city in the world.
 
 ## Table of Contents
 
 - [Demo](#demo)
 - [Stack](#stack)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
 - [Screenshot](#screenshot)
 - [Main features](#main-features)
 - [Run the project locally](#run-the-project-locally)
@@ -16,19 +18,25 @@ This project is a weather application that can collect and save data for any cit
 
 ## Demo
 
-You can see a live demo of the project [here](https://jesselessa-weather-app-react-tailwind.netlify.app/).
+You can see a live demo of the project [here](https://weather-app.jesselessa.dev).
 
 ## Stack
 
-This project was created with **React** using **Vite** for rapid development and **Tailwind CSS** for styling.
+### Frontend
 
-The weather data are fetched from **OpenWeatherMap API**, whose documentation can be found [here](https://openweathermap.org/api).
+This project was created with **React** using **Vite** for rapid development and **Tailwind CSS** for styling.
 
 The navigation in the application was managed by **React Router**.
 
+### Backend
+
+The API has been created with **Node.js** and **Express**.
+
+The weather data are fetched from **OpenWeatherMap API**, the documentation of which can be found [here](https://openweathermap.org/api)
+
 ## Screenshot
 
-![Screenshot](./public/screenshot.png)
+![Screenshot](./client/public/screenshot.png)
 
 ## Main features
 
@@ -40,13 +48,16 @@ The navigation in the application was managed by **React Router**.
 ## Run the project locally
 
 1. Open your terminal and navigate to the location where you want the local repository to be copied
-2. Clone the repository : `git clone https://github.com/jesselessa/weather-app-react-tailwind-client.git`
-3. Navigate to the project directory : `cd weather-app-react-tailwind-client`
-4. Inside the project directory :
-   - Run the application in development mode : `npm run dev`
-   - Open http://localhost:5173 in your web browser to view the live application
+2. Clone the repository : `git clone https://github.com/jesselessa/weather-app-react-node.git`
+3. Navigate to the project directory : `cd weather-app-react-node`
+4. Copy the `.env.example` file from the `backend` folder, and rename it to `.env`. Fill in the required environment variables.
+5. Install the dependencies necessary to the project inside each folder by running `npm install`.
+6. Then :
+   - Inside the `client` folder, run the application in development mode : `npm run dev`.
+   - Inside the `backend` folder, start the server and launch the database : `npm start`.
+7. Finally, open `http://localhost:5173` in your web browser to view the live application.
 
-Do not forget to run [the custom API](https://github.com/jesselessa/weather-app-node-express-api) alongside your project for it to work properly !
+**Important: Do not commit your `.env` file containing sensitive information (API keys, secrets) to a public repository. Add them to your `.gitignore` file**
 
 ## Getting Started with Vite
 
