@@ -17,7 +17,7 @@ app.use(express.json());
 // Configure CORS
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT_URL_WWW || process.env.CLIENT_URL_NON_WWW
     methods: ["GET"],
     optionsSuccessStatus: 204, // 204 = success but server doesn't return any data in response (contrary to status code 200)
   })
