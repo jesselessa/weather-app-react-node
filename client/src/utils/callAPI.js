@@ -1,8 +1,6 @@
 export const fetchCityData = async (city) => {
-  const apiUrl =
-    `${import.meta.env.VITE_API_URL_WWW}/data/${city}` ||
-    `${import.meta.env.VITE_API_URL_NON_WWW}/data/${city}`;
-
+  const apiUrl = `${import.meta.env.VITE_API_URL}/data/${city}`;
+  
   try {
     const res = await fetch(apiUrl);
 
