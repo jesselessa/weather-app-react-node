@@ -18,7 +18,7 @@ This project is a weather application that can collect and save data from any ci
 
 ## Demo
 
-You can see a live demo of the project [here](https://weather-app.jesselessa.dev).
+You can see a live demo of the project [here](https://www.weather-app.jesselessa.dev).
 
 ## Stack
 
