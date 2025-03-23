@@ -1,6 +1,6 @@
 # weather-app-react-node
 
-This project is a weather application that can collect and save data from any city in the world.
+This project is a weather application that can collect and save data from any city in the world, thanks to OpenWeatherMap API.
 
 ## Table of Contents
 
