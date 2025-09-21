@@ -26,16 +26,44 @@ app.use(
 //---------------- ROUTES ------------------//
 //* Get data from any city
 app.get("/api/data/:city", (req, res) => {
-  const city = req.params.city;
+  // Sanitize the city input to prevent potential injection issues and trim whitespace
+  const city = req.params.city.trim();
   const apiKey = process.env.API_KEY;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
+  // Check if the city parameter is empty
+  if (!city) {
+    return res.status(400).json({ error: "City name cannot be empty." });
+  }
+
   fetch(url)
-    .then((res) => res.json())
-    .then((data) => res.json(data))
+    .then((response) => {
+      // Check for unsuccessful HTTP status codes (e.g., 404 for city not found)
+      if (!response.ok) {
+        // If the API response is not successful, throw an error to be caught below
+        throw new Error(
+          `Failed to fetch weather data for ${city}: ${response.statusText}`
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Check for a specific error message from the API itself
+      if (data.cod && data.cod !== 200) {
+        // The API returns a 'cod' property for errors (e.g., 404 for city not found)
+        return res.status(data.cod).json(data);
+      }
+      res.json(data);
+    })
     .catch((error) => {
-      console.log(error);
-      return res.json(error);
+      console.error("Fetch error:", error.message);
+      // Respond with a more informative error message and a 500 status code
+      res
+        .status(500)
+        .json({
+          error:
+            "Failed to retrieve weather data. Please check the city name and try again.",
+        });
     });
 });
 
