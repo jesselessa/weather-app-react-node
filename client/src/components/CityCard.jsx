@@ -24,7 +24,7 @@ export default function CityCard({
 
           <img
             className="w-24 mx-auto"
-            src={`http://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`}
+            src={`https://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`}
             alt={`${name} weather`}
           />
 
