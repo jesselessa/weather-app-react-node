@@ -13,8 +13,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 //-------------- MIDDLEWARES ---------------//
-// Utilisation de Helmet pour sécuriser les en-têtes HTTP
-app.use(helmet());
+// Use Helmet defaults to set a variety of security headers
+app.use(helmet()); 
+// Override the default Content Security Policy (CSP) with a custom configuration
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true, // Use the default CSP directives
+    directives: {
+      "img-src": ["'self'", "https:", "data:"], // Allow images from the same origin, HTTPS URLs, and data URIs
+    },
+  })
+);
+
 app.use(express.json());
 
 // Configure CORS
