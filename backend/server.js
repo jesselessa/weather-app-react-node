@@ -8,13 +8,13 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 
 const app = express();
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 //-------------- MIDDLEWARES ---------------//
 // Use Helmet defaults to set a variety of security headers
-app.use(helmet()); 
+app.use(helmet());
 // Override the default Content Security Policy (CSP) with a custom configuration
 app.use(
   helmet.contentSecurityPolicy({
@@ -87,6 +87,6 @@ app.get("*", (req, res) => {
 });
 
 //------------- START SERVER ---------------//
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
